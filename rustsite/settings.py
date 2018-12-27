@@ -85,17 +85,15 @@ WSGI_APPLICATION = 'rustsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL')
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
 # }
+DATABASES = {
+    'default': 'postgres://salwjtgisnqebz:055ebc119d5ceda0cadd6fff9c586c8b0f0ba13ffafaaf6956cdd8f0f60972db@ec2-54-235-178-189.compute-1.amazonaws.com:5432/ddcrbp4kdigu6j'
+}
 
 
 # Password validation
