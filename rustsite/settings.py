@@ -11,31 +11,22 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-import django_heroku
-import dj_database_url
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
-STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'gyn845p156ondf&1wu24(p5e97x7s4$dp78k^n^-^svj9#+xvp'
-#SECRET_KEY = config('SECRET_KEY')
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-#DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -60,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'rustsite.urls'
@@ -87,29 +77,10 @@ WSGI_APPLICATION = 'rustsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-# DATABASES = {
-#     'default': 'postgres://salwjtgisnqebz:055ebc119d5ceda0cadd6fff9c586c8b0f0ba13ffafaaf6956cdd8f0f60972db@ec2-54-235-178-189.compute-1.amazonaws.com:5432/ddcrbp4kdigu6j'
-# }
-
-# DATABASES = {
-#       'default': dj_database_url.config(
-#           default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-#       )
-#   }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangogirls',
-        'USER': 'name',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -150,10 +121,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-#STATIC_URL = '/static/'
-
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-django_heroku.settings(locals())
+STATIC_URL = '/static/'
