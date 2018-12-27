@@ -35,7 +35,7 @@ SECRET_KEY = 'gyn845p156ondf&1wu24(p5e97x7s4$dp78k^n^-^svj9#+xvp'
 DEBUG = False
 #DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -97,11 +97,21 @@ WSGI_APPLICATION = 'rustsite.wsgi.application'
 #     'default': 'postgres://salwjtgisnqebz:055ebc119d5ceda0cadd6fff9c586c8b0f0ba13ffafaaf6956cdd8f0f60972db@ec2-54-235-178-189.compute-1.amazonaws.com:5432/ddcrbp4kdigu6j'
 # }
 
+# DATABASES = {
+#       'default': dj_database_url.config(
+#           default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
+#       )
+#   }
 DATABASES = {
-      'default': dj_database_url.config(
-          default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-      )
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'djangogirls',
+        'USER': 'name',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 
 # Password validation
@@ -142,8 +152,8 @@ USE_TZ = True
 
 #STATIC_URL = '/static/'
 
-import dj_database_url 
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 django_heroku.settings(locals())
