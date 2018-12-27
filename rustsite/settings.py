@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -33,7 +34,7 @@ SECRET_KEY = 'gyn845p156ondf&1wu24(p5e97x7s4$dp78k^n^-^svj9#+xvp'
 DEBUG = False
 #DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -91,9 +92,15 @@ WSGI_APPLICATION = 'rustsite.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+# DATABASES = {
+#     'default': 'postgres://salwjtgisnqebz:055ebc119d5ceda0cadd6fff9c586c8b0f0ba13ffafaaf6956cdd8f0f60972db@ec2-54-235-178-189.compute-1.amazonaws.com:5432/ddcrbp4kdigu6j'
+# }
+
 DATABASES = {
-    'default': 'postgres://salwjtgisnqebz:055ebc119d5ceda0cadd6fff9c586c8b0f0ba13ffafaaf6956cdd8f0f60972db@ec2-54-235-178-189.compute-1.amazonaws.com:5432/ddcrbp4kdigu6j'
-}
+      'default': dj_database_url.config(
+          default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
+      )
+  }
 
 
 # Password validation

@@ -1,1 +1,1 @@
-web: gunicorn Rust-Website.wsgi --log-file -
+web: gunicorn Rust-Website.wsgi
