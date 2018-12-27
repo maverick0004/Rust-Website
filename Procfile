@@ -1,1 +1,1 @@
-web: gunicorn Rust-Website.wsgi
+web: gunicorn djangoherokuapp.wsgi --log-file -
